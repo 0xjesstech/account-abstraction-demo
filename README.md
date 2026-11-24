@@ -1,6 +1,6 @@
 # CoffeeShop: gasless purchases with ZeroDev smart accounts
 
-A tiny shop contract that only takes an ERC-20 token, plus scripts that let a user with **zero ETH** buy a coffee in **one signature**, using an ERC-4337 smart account (ZeroDev Kernel) and a sponsoring paymaster on Arbitrum Sepolia.
+A coffee shop contract that only takes an ERC-20 token, plus scripts that let a user with **zero ETH** buy a coffee in **one signature**, using an ERC-4337 smart account (ZeroDev Kernel) and a sponsoring paymaster on Arbitrum Sepolia.
 
 Companion repo for the article in [`article.md`](article.md).
 
@@ -9,10 +9,10 @@ Companion repo for the article in [`article.md`](article.md).
 | Path | What it is |
 |---|---|
 | `src/CoffeeShop.sol` | The shop: `buyCoffee(quantity)` pulls `price * quantity` tokens, `withdraw(to)` for the owner |
-| `script/Deploy.s.sol` | Deploys the shop. Defaults to 6TEST on Arbitrum Sepolia at 5 tokens per coffee |
+| `script/Deploy.s.sol` | Deploys the shop. Defaults to a mintable 6-decimal test token on Arbitrum Sepolia at 5 tokens per coffee |
 | `test/` | Foundry tests, including the "before AA" approve-then-buy EOA flow |
 | `zerodev/account.ts` | Creates the user's Kernel smart account (ECDSA signer) |
-| `zerodev/address.ts` | Prints the smart account's address, whether it's deployed, and its 6TEST balance |
+| `zerodev/address.ts` | Prints the smart account's address, whether it's deployed, and its token balance |
 | `zerodev/buyCoffeeSponsored.ts` | Approve + buy in one UserOp, gas sponsored by your ZeroDev Gas Policy |
 | `zerodev/buyCoffeeUSDC.ts` | Same, but the user pays gas in an ERC-20. Needs mainnet USDC or a self-funded ERC-20 paymaster, and skips cleanly otherwise |
 
@@ -42,7 +42,7 @@ cp .env.example .env
 
 Fill in `ZERODEV_RPC`, `PRIVATE_KEY` (the user's signer, never needs ETH) and `SHOP_ADDRESS`.
 
-**4. Fund the smart account with 6TEST**
+**4. Fund the smart account with test tokens**
 
 ```shell
 npm run address    # prints the smart account address

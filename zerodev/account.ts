@@ -16,9 +16,9 @@ export const chain = arbitrumSepolia
 export const entryPoint = getEntryPoint("0.7")
 export const kernelVersion = KERNEL_V3_1
 
-// 6TEST: 6-decimal test token ZeroDev's ERC-20 paymaster accepts on testnets
-export const SIX_TEST = "0x3870419Ba2BBf0127060bCB37f69A1b1C090992B"
-export const PRICE = 5_000_000n // 5 6TEST, matches script/Deploy.s.sol
+// The shop's payment token: a 6-decimal test token on Arbitrum Sepolia that anyone can mint
+export const TOKEN = "0x3870419Ba2BBf0127060bCB37f69A1b1C090992B"
+export const PRICE = 5_000_000n // 5 tokens, matches script/Deploy.s.sol
 
 export const erc20Abi = parseAbi([
   "function approve(address spender, uint256 amount) returns (bool)",

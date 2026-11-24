@@ -1,7 +1,7 @@
 import { createKernelAccountClient, createZeroDevPaymasterClient } from "@zerodev/sdk"
 import { encodeFunctionData, http } from "viem"
 import {
-  PRICE, SIX_TEST, ZERODEV_RPC, chain, erc20Abi, getAccount, publicClient, shopAbi, shopAddress,
+  PRICE, TOKEN, ZERODEV_RPC, chain, erc20Abi, getAccount, publicClient, shopAbi, shopAddress,
 } from "./account.js"
 
 // Buy one coffee where the app pays all the gas.
@@ -28,7 +28,7 @@ const kernelClient = createKernelAccountClient({
 const hash = await kernelClient.sendUserOperation({
   callData: await account.encodeCalls([
     {
-      to: SIX_TEST,
+      to: TOKEN,
       value: 0n,
       data: encodeFunctionData({ abi: erc20Abi, functionName: "approve", args: [SHOP, PRICE] }),
     },

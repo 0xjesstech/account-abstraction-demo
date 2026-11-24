@@ -1,13 +1,13 @@
 import { createKernelAccountClient, createZeroDevPaymasterClient, getERC20PaymasterApproveCall } from "@zerodev/sdk"
 import { encodeFunctionData, http, parseUnits } from "viem"
 import {
-  PRICE, SIX_TEST, ZERODEV_RPC, chain, entryPoint, erc20Abi, getAccount, publicClient, shopAbi, shopAddress,
+  PRICE, TOKEN, ZERODEV_RPC, chain, entryPoint, erc20Abi, getAccount, publicClient, shopAbi, shopAddress,
 } from "./account.js"
 
 // Buy one coffee and pay the gas in an ERC-20 (USDC) instead of ETH.
 //
 // ZeroDev's built-in ERC-20 paymaster only accepts USDC on mainnets, and it
-// rejects 6TEST on Arbitrum Sepolia ("token is not currently supported").
+// rejects our test token on Arbitrum Sepolia ("token is not currently supported").
 // So on testnet this only runs once you've set up a self-funded ERC-20
 // paymaster in the ZeroDev dashboard and put its details in .env:
 //   GAS_TOKEN=<token the paymaster accepts>
@@ -49,7 +49,7 @@ const hash = await kernelClient.sendUserOperation({
     }),
     // 2. let the shop take the coffee payment
     {
-      to: SIX_TEST,
+      to: TOKEN,
       value: 0n,
       data: encodeFunctionData({ abi: erc20Abi, functionName: "approve", args: [SHOP, PRICE] }),
     },
